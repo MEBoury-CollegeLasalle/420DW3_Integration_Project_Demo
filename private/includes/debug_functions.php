@@ -121,7 +121,7 @@ function debug(mixed $input, int $outputMethod = DEBUG_OUTPUT_ECHO) : ?string {
 function get_request_headers() : array {
     $headers = array();
     foreach($_SERVER as $key => $value) {
-        if (substr($key, 0, 5) <> 'HTTP_') {
+        if (!str_starts_with($key, 'HTTP_')) {
             continue;
         }
         $header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
