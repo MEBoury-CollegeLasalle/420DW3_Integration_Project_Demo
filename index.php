@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 
 require_once "defines.php";
-require_once "private/includes/debug_functions.php";
+require_once INCLUDES_DIR."/debug_functions.php";
+require_once INCLUDES_DIR."/database.php";
+require_once INCLUDES_DIR."/customer_db_functions.php";
 
 
 ?>
@@ -37,6 +39,7 @@ require_once "private/includes/debug_functions.php";
 <main class="main container-fluid">
     <h1>index.php</h1>
     <?php
+
     debug($_SERVER);
     debug($_REQUEST);
     ?>
