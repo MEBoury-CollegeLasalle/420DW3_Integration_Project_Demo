@@ -9,6 +9,13 @@ declare(strict_types=1);
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
+require_once "../../defines.php";
+require_once "database.php";
+
+use Normslabs\WebApplication\System\Exceptions\DatabaseConnectionException;
+use Normslabs\WebApplication\System\Exceptions\DatabaseLogicException;
+use Normslabs\WebApplication\System\Validation\Exceptions\ValidationException;
+
 
 /**
  * Retrieves a customer from the database based on its id number.
@@ -16,23 +23,23 @@ declare(strict_types=1);
  * @param int $id The id of the customer.
  *
  * @return array An associative array representing the customer.
- * @throws Exception
+ * @throws DatabaseLogicException
+ * @throws ValidationException
+ * @throws DatabaseConnectionException
  *
  * @author Marc-Eric Boury
  * @since  2/16/2023
  */
 function get_customer_by_id(int $id) : array {
-    if ($id < 1) {
-        throw new Exception("Invalid Id value: [$id].");
-    }
+    db_validate_int_id($id, true);
     
-    $sql = "SELECT * FROM customers WHERE id = $id;";
-    $connection = get_connection();
+    $sql = "SELECT * FROM `customers` WHERE `id` = $id;";
+    $connection = db_get_connection();
     $result_set = $connection->query($sql);
     if ($result_set->num_rows == 0) {
         return [];
     } elseif ($result_set->num_rows > 1) {
-        throw new Exception("Oh boy you have a problem, bro!");
+        throw new DatabaseLogicException("Oh boy you have a problem, bro!");
     }
     return $result_set->fetch_assoc();
 }
@@ -40,92 +47,88 @@ function get_customer_by_id(int $id) : array {
 /**
  * Creates a new customer in the database from the required username and password hash.
  *
- * @param string $username The customer username
+ * @param string $username     The customer username
  * @param string $passwordHash The customer's hashed password
  *
  * @return array
- * @throws Exception
+ * @throws DatabaseConnectionException
+ * @throws ValidationException
+ * @throws DatabaseLogicException
  *
  * @author Marc-Eric Boury
  * @since  2/16/2023
  */
 function create_customer(string $username, string $passwordHash) : array {
-    if (empty($username) || empty($passwordHash)) {
-        throw new Exception("Username or password hash cannot be empty.");
-    }
+    db_validate_string($username, true);
+    db_validate_string($passwordHash, true);
     
     $sql = "INSERT INTO `customers` (`username`, `passwordHash`) VALUES (\"".$username."\", \"".$passwordHash."\")";
-    $connection = get_connection();
+    $connection = db_get_connection();
     if ($connection->query($sql)) {
-        $newId = $connection->insert_id;
-        return get_customer_by_id($newId);
-    } else {
-        return [
-            "errno" => $connection->errno,
-            "error" => $connection->error
-        ];
+        $new_id = $connection->insert_id;
+        return get_customer_by_id($new_id);
     }
+    return [
+        "errno" => $connection->errno,
+        "error" => $connection->error
+    ];
 }
 
 /**
  * @param array $customer_array
  *
  * @return array
- * @throws Exception
+ * @throws DatabaseConnectionException
+ * @throws ValidationException
  *
  * @author Marc-Eric Boury
  * @since  2/16/2023
  */
 function update_customer(array $customer_array) : array {
-    if (!isset($customer_array["id"]) || !is_numeric($customer_array["id"]) || $customer_array["id"] < 1) {
-        throw new Exception("Invalid customer id: [".$customer_array["id"]."].");
-    } elseif (!isset($customer_array["username"]) || empty($customer_array["username"])) {
-        throw new Exception("Invalid customer username: [".$customer_array["username"]."].");
-    } elseif (!isset($customer_array["passwordHash"]) || empty($customer_array["passwordHash"])) {
-        throw new Exception("Invalid customer passwordHash: [".$customer_array["passwordHash"]."].");
-    } elseif (!isset($customer_array["dateCreated"]) || empty($customer_array["dateCreated"])) {
-        throw new Exception("Invalid customer creation date: [".$customer_array["dateCreated"]."].");
+    db_validate_int_id($customer_array["id"], true);
+    db_validate_string($customer_array["username"], true);
+    db_validate_string($customer_array["passwordHash"], true);
+    if (empty($customer_array["dateCreated"])) {
+        throw new ValidationException("Invalid customer creation date: [".$customer_array["dateCreated"]."].");
     }
     
     $sql = "UPDATE `customers` SET `username` = \"".$customer_array["username"]."\",
     `passwordHash` = \"".$customer_array["passwordHash"]."\",
     `dateCreated` = \"".$customer_array["dateCreated"]."\"
     WHERE `id` = ".$customer_array["id"].";";
-    $connection = get_connection();
+    $connection = db_get_connection();
     if ($connection->query($sql)) {
         return $customer_array;
-    } else {
-        return [
-            "errno" => $connection->errno,
-            "error" => $connection->error
-        ];
     }
+    return [
+        "errno" => $connection->errno,
+        "error" => $connection->error
+    ];
 }
 
 /**
- *
+ * Deletes a re customer from the database
  *
  * @param int $id
  *
  * @return bool|array
- * @throws Exception
+ * @throws DatabaseConnectionException
+ * @throws ValidationException
  *
  * @author Marc-Eric Boury
  * @since  2/16/2023
  */
 function delete_customer(int $id) : bool|array {
-    if ($id < 1) {
-        throw new Exception("Invalid Id value: [$id].");
-    }
-    $sql = "DELETE FROM customers WHERE id = $id;";
-    $connection = get_connection();
+    db_validate_int_id($id, true);
+    
+    $sql = "DELETE FROM `customers` WHERE `id` = $id;";
+    $connection = db_get_connection();
     if ($connection->query($sql)) {
         return true;
-    } else {
-        return [
-            "errno" => $connection->errno,
-            "error" => $connection->error
-        ];
     }
+    return [
+        "errno" => $connection->errno,
+        "error" => $connection->error
+    ];
     
 }

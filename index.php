@@ -9,11 +9,11 @@ declare(strict_types=1);
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
+
 require_once "defines.php";
 require_once INCLUDES_DIR."/debug_functions.php";
 require_once INCLUDES_DIR."/database.php";
 require_once INCLUDES_DIR."/customer_db_functions.php";
-
 
 ?>
 <!Doctype html>
@@ -39,7 +39,6 @@ require_once INCLUDES_DIR."/customer_db_functions.php";
 <main class="main container-fluid">
     <h1>index.php</h1>
     <?php
-
     debug($_SERVER);
     debug($_REQUEST);
     ?>

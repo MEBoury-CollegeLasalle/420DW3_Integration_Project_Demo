@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 
 require_once "../../defines.php";
-require_once "../../private/includes/debug_functions.php";
+require_once INCLUDES_DIR."/debug_functions.php";
 
 ?>
 <!Doctype html>

@@ -9,6 +9,7 @@ declare(strict_types=1);
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
+
 // ABSOLUTE (INTERNAL) PATHS
 /**
  * Absolute path to the root of the project
@@ -17,23 +18,22 @@ const PROJECT_ROOT = __DIR__;
 /**
  * Absolute path to the private directory
  */
-const PRIVATE_DIR = PROJECT_ROOT."/private";
+const PRIVATE_DIR = PROJECT_ROOT.DIRECTORY_SEPARATOR."private";
 /**
  * Absolute path to the fragments directory
  */
-const FRAGMENTS_DIR = PRIVATE_DIR."/fragments";
+const FRAGMENTS_DIR = PRIVATE_DIR.DIRECTORY_SEPARATOR."fragments";
 /**
  * Absolute path to the includes directory
  */
-const INCLUDES_DIR = PRIVATE_DIR."/includes";
+const INCLUDES_DIR = PRIVATE_DIR.DIRECTORY_SEPARATOR."includes";
 /**
  * Absolute path to the src directory
  */
-const SOURCES_DIR = PRIVATE_DIR."/src";
+const SOURCES_DIR = PRIVATE_DIR.DIRECTORY_SEPARATOR."src";
 
 
 // SERVER-RELATIVE (WEB) PATHS
-
 /**
  * Relative path (for the web) to the project root directory
  */
@@ -58,3 +58,27 @@ const JS_DIR = PUBLIC_DIR."/js";
  * Relative path (for the web) to the pages directory
  */
 const PAGES_DIR = PUBLIC_DIR."/pages";
+
+
+
+
+// Registering manual autoloader for object-oriented PHP
+/**
+ * @param string $class
+ *
+ * @return bool
+ *
+ * @author Marc-Eric Boury
+ * @since  2/16/2023
+ */
+$psr4_autoloader = function(string $class) : bool {
+    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+    $file_path = SOURCES_DIR . DIRECTORY_SEPARATOR . $file;
+    if (file_exists($file_path)) {
+        require $file_path;
+        return true;
+    }
+    return false;
+};
+
+spl_autoload_register($psr4_autoloader);

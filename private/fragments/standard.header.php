@@ -17,7 +17,7 @@ declare(strict_types=1);
     </div>
 </div>
 <div class="menu-bar row">
-    <div class="nav-menu col-8 row justify-content-start">
+    <div class="nav-menu col-10 row justify-content-start">
         <div class="nav-menu-item">
             <a class="fill-div" href="<?=PAGES_DIR."/login.php"?>"><i class="icon gg-user"></i>&nbsp;Login</a>
         </div>
@@ -28,7 +28,7 @@ declare(strict_types=1);
             <a class="fill-div" href="<?=PAGES_DIR."/cart.php"?>"><i class="icon gg-shopping-cart"></i>&nbsp;Cart</a>
         </div>
     </div>
-    <div class="usermenu col-4 row justify-content-end">
+    <div class="usermenu col-2 row justify-content-end">
     
     </div>
 </div>
