@@ -1,0 +1,18 @@
+.footer {
+    background-color: black;
+    bottom: 0;
+    color: white;
+    position: sticky;
+}
+
+.footerbar {
+    height: 100px;
+}
+
+.copyright-bar {
+
+}
+
+.copyright-notice {
+    font-style: italic;
+}

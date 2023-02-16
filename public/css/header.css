@@ -1,0 +1,82 @@
+.header {
+    background-color: black;
+    color: white;
+    position: sticky;
+    text-transform: uppercase;
+    top: 0;
+}
+
+.title-bar {
+    padding-top: 10px;
+}
+
+.title-container {
+    overflow: hidden;
+}
+
+.title {
+    -moz-animation: my-animation 15s linear infinite;
+    -webkit-animation: my-animation 15s linear infinite;
+    animation: my-animation 15s linear infinite;
+    letter-spacing: 0.1em;
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.menu-bar {
+    padding-bottom: 10px;
+}
+
+.nav-menu-item {
+    height: 40px;
+    width: 200px;
+    display: inline-block;
+}
+
+a.fill-div {
+    border-radius: 5px;
+    color: white;
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    height: 100%;
+    letter-spacing: 0.15em;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+a.fill-div:hover {
+    background-color: #202020;
+}
+
+.nav-menu-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(-100%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(-100%); }
+}
+
+@keyframes my-animation {
+    from {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    to {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}

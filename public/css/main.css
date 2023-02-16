@@ -1,0 +1,22 @@
+.row,
+.container,
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.fullwidth {
+    width: 100% !important;
+}
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.icon {
+    display: inline-block !important;
+}
+
+.main {
+
+}

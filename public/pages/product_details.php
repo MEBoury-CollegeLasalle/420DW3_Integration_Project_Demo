@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 /*
- * 420DW3_Integration_Project_Demo products.php
+ * 420DW3_Integration_Project_Demo product_details.php
  * 
- * @author Marc-Eric Boury (MEbou)
- * @since 2/9/2023
+ * @author Marc-Eric Boury (Newironsides)
+ * @since 2023-02-15
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
@@ -16,7 +16,7 @@ require_once "../../private/includes/debug_functions.php";
 <!Doctype html>
 <html lang="en-CA">
 <head>
-    <title>Norm's Shop - Our products</title>
+    <title>420DW3 - Integration Project</title>
     <link rel="shortcut icon" href="<?=WEB_ROOT."/favicon.ico"?>">
     <link rel="stylesheet" href="<?=CSS_DIR."/bootstrap.css"?>">
     <link rel="stylesheet" href="<?=CSS_DIR."/main.css"?>">
@@ -34,7 +34,7 @@ require_once "../../private/includes/debug_functions.php";
     ?>
 </header>
 <main class="main container-fluid">
-    <h1>products.php</h1>
+    <h1>product_details.php</h1>
     <?php
     debug($_SERVER);
     debug($_REQUEST);
