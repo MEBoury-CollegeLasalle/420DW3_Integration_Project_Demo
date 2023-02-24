@@ -8,3 +8,6 @@ declare(strict_types=1);
  * @since 2/16/2023
  * (c) Copyright 2023 Marc-Eric Boury 
  */
+
+require_once __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."defines.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."database.php";

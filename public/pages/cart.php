@@ -9,8 +9,8 @@ declare(strict_types=1);
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
-require_once "../../defines.php";
-require_once INCLUDES_DIR."/debug_functions.php";
+require_once "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."defines.php";
+require_once INCLUDES_DIR.DIRECTORY_SEPARATOR."debug_functions.php";
 
 ?>
 <!Doctype html>
@@ -30,7 +30,7 @@ require_once INCLUDES_DIR."/debug_functions.php";
 <body>
 <header class="header container-fluid">
     <?php
-    require FRAGMENTS_DIR."/standard.header.php";
+    require FRAGMENTS_DIR.DIRECTORY_SEPARATOR."standard.header.php";
     ?>
 </header>
 <main class="main container-fluid">
@@ -42,7 +42,7 @@ require_once INCLUDES_DIR."/debug_functions.php";
 </main>
 <footer class="footer container-fluid">
     <?php
-    require FRAGMENTS_DIR."/standard.footer.php";
+    require FRAGMENTS_DIR.DIRECTORY_SEPARATOR."standard.footer.php";
     ?>
 </footer>
 </body>

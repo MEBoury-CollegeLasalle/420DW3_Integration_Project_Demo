@@ -9,8 +9,8 @@ declare(strict_types=1);
  * (c) Copyright 2023 Marc-Eric Boury 
  */
 
-require_once "../../defines.php";
-require_once "database.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."defines.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."database.php";
 
 use Normslabs\WebApplication\System\Exceptions\DatabaseConnectionException;
 use Normslabs\WebApplication\System\Exceptions\DatabaseLogicException;
