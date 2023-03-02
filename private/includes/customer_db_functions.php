@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 
 require_once __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."defines.php";
-require_once __DIR__.DIRECTORY_SEPARATOR."database.php";
+require_once INCLUDES_DIR."database.php";
 
 use Normslabs\WebApplication\System\Exceptions\DatabaseConnectionException;
 use Normslabs\WebApplication\System\Exceptions\DatabaseLogicException;
@@ -93,8 +93,7 @@ function update_customer(array $customer_array) : array {
     }
     
     $sql = "UPDATE `customers` SET `username` = \"".$customer_array["username"]."\",
-    `passwordHash` = \"".$customer_array["passwordHash"]."\",
-    `dateCreated` = \"".$customer_array["dateCreated"]."\"
+    `passwordHash` = \"".$customer_array["passwordHash"]."\"
     WHERE `id` = ".$customer_array["id"].";";
     $connection = db_get_connection();
     if ($connection->query($sql)) {
