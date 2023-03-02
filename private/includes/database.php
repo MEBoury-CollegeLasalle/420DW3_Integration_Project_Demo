@@ -14,6 +14,7 @@ require_once __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY
 use Normslabs\WebApplication\System\Exceptions\DatabaseConnectionException;
 use Normslabs\WebApplication\System\Validation\Exceptions\ValidationException;
 
+mysqli_report(MYSQLI_REPORT_ERROR|MYSQLI_REPORT_STRICT);
 
 /**
  * Returns a new {@see mysqli} connection object.
@@ -25,9 +26,13 @@ use Normslabs\WebApplication\System\Validation\Exceptions\ValidationException;
  * @since    2/16/2023
  */
 function db_get_connection() : mysqli {
-    $mysqli = new mysqli("localhost", "root", "", "420dw3_project", 3306);
-    if ($mysqli->errno) {
-        throw new DatabaseConnectionException($mysqli->error, $mysqli->errno);
+    static $mysqli = null;
+    if (is_null($mysqli)) {
+        $mysqli = new mysqli("localhost", "root", "", "420dw3_project", 3306);
+        $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);
+        if ($mysqli->errno) {
+            throw new DatabaseConnectionException($mysqli->error, $mysqli->errno);
+        }
     }
     return $mysqli;
 }

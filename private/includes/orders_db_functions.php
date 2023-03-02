@@ -31,9 +31,15 @@ enum OrderStatus : string {
 }
 
 /**
+ * @param int $id
+ *
+ * @return array
+ * @throws DatabaseConnectionException
  * @throws DatabaseLogicException
  * @throws ValidationException
- * @throws DatabaseConnectionException
+ *
+ * @author Marc-Eric Boury
+ * @since  3/2/2023
  */
 function get_order_by_id(int $id) : array {
     db_validate_int_id($id, true);
